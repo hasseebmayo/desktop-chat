@@ -1,20 +1,42 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    fontFamily: {
+      inter: "Inter",
     },
+    backgroundColor: {
+      secondry: "#312F2F",
+      primary: "#1F1D1D",
+      third: "#312F2F",
+      hover: "#7C39E6",
+    },
+    colors: {
+      hover: "#7C39E6",
+      active: "#21ff5ffc",
+    },
+    borderColor: {
+      primary: "#7C39E6",
+    },
+    borderRadius: {
+      primary: "10px",
+      secondary: "30px",
+    },
+    fontSize: {
+      para: "12px",
+      heading: "20px",
+    },
+    boxShadow: {
+      form: "18px 12px 145px 27px rgba(158,131,201,0.79) inset",
+    },
+    extend: {},
   },
   plugins: [],
-}
-export default config
+};
+export default config;

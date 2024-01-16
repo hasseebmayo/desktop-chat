@@ -2,26 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter";
+  background-color: #fff;
+}
+* button {
+  cursor: pointer;
+}
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
+.nav-icons > svg {
+  width: 34px;
+  height: 34px;
+}
+.mainPage {
+  height: 100vh;
+}
+.messageScroll::-webkit-scrollbar {
+  width: 3px;
+}
+.messageScroll::-webkit-scrollbar-thumb {
+  background-color: #8f54a0;
+  border-radius: 10px;
+}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.messageScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chatBody::-webkit-scrollbar {
+  width: 3px;
+}
+.chatBody::-webkit-scrollbar-thumb {
+  background-color: #8f54a0;
+  border-radius: 10px;
+}
+
+.chatBody::-webkit-scrollbar-track {
+  background: transparent;
+}
+.textarea {
+  width: 100%;
+  min-height: 50px;
+  outline: none;
+  height: auto;
+  max-height: 150px;
+  overflow-x: hidden;
+  position: absolute;
+  overflow-y: auto;
+  padding: 5px 10px;
+  bottom: -26px;
+  font-family: "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI", Arial,
+    sans-serif;
+  font-size: 18px;
+  white-space: pre-wrap;
+  word-spacing: 0%;
+
+  left: 10px;
+  background-color: #312f2f;
+  backdrop-filter: blur(10px);
+
+  border-radius: 10px;
+}
+.textarea::-webkit-scrollbar {
+  width: 3px;
+}
+.bgTransparent {
+  background: transparent;
+}
+.textarea::-webkit-scrollbar-thumb {
+  background-color: #8f54a0;
+  border-radius: 10px;
+}
+.profileEditBar {
+  border-bottom: 1px solid #7c39e6;
+}
+.textarea:focus {
+  outline: 1px solid #7c39e6;
+}
+.shadowForm {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.messageLeft {
+  width: auto;
+  max-width: 50%;
+  min-width: 100px;
+}
+@media screen and (max-width: 1600px) {
+  .mainPage {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .mainPage {
+    width: 1500px;
+  }
+}
+*::selection {
+  background: #7c39e6;
+  color: white;
 }

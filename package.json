@@ -9,19 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
+    "@tanstack/react-query": "^5.17.9",
+    "@tanstack/react-query-devtools": "^5.17.10",
+    "axios": "^1.6.5",
+    "bcryptjs": "^2.4.3",
+    "emoji-picker-react": "^4.6.8",
+    "framer-motion": "^10.18.0",
+    "mongoose": "^8.0.4",
+    "next": "14.0.4",
+    "next-auth": "^4.24.5",
+    "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.4"
+    "react-hook-form": "^7.49.3",
+    "react-hot-toast": "^2.4.1",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@svgr/webpack": "^8.1.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "typescript": "^5"
   }
 }
