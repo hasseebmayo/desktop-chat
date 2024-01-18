@@ -2,52 +2,36 @@
 
 import Input from "../../components/Input/Input";
 import SeachIcon from "../../assets/images/SearchIcon.svg";
+import ChatIcon from "../../assets/images/ChatIcon.svg";
 
 import UserMessageInfo from "./Messages/UserMessageInfo";
 import UserBtnTab from "./Messages/UserBtnTab";
 import useUsers from "@/hooks/fetchingHook/useUser";
 import usePostApi from "@/hooks/usePostApi/usePostApi";
 import { IUserId, useMessageContext } from "@/Provider/MessageProvider";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/utils/queryKeys/queryKeys";
 
 const MessagesSection = () => {
   const { isLoading, response } = useUsers();
 
   const { mutationFunction } = usePostApi();
   const { authData, setChatOptions, chatOptions } = useMessageContext();
+  const queryClient = useQueryClient();
 
   const fetchUserMessages = (user: IUserId) => {
-    const isChatRoom = user.hasOwnProperty("chatrooms");
     // We'll compare if the both user have the same chatId in the chatrooms array then it will proceed to create new chat room
     const isCommonRoom = authData.chatrooms.find((d) =>
       user.chatrooms.includes(d)
     );
 
-    if (isCommonRoom) {
-      setChatOptions((prev) => ({
-        ...prev,
-        chatRoomId: isCommonRoom ? isCommonRoom.toString() : null,
-        currentActiveUser: user,
-        id: user._id,
-      }));
-      return;
-    }
-
-    mutationFunction(
-      {
-        data: {
-          members: [authData._id, user._id],
-        },
-        path: "/api/user/chatroom",
-      },
-      (res) => {
-        setChatOptions((prev) => ({
-          ...prev,
-          chatRoomId: res?.data?.data?._id,
-          currentActiveUser: user,
-          id: user._id,
-        }));
-      }
-    );
+    setChatOptions((prev) => ({
+      ...prev,
+      chatRoomId: isCommonRoom ? isCommonRoom.toString() : null,
+      currentActiveUser: user,
+      id: user._id,
+    }));
+    return;
   };
   return (
     <>
@@ -67,8 +51,7 @@ const MessagesSection = () => {
             <UserBtnTab />
             <div
               className="flex flex-col gap-[10px] overflow-y-auto  h-[100%] mb-[40px] 
-        
-        messageScroll
+        messageScroll relative
         "
             >
               {response?.map((d: IUserId, i: number) => (
@@ -80,6 +63,14 @@ const MessagesSection = () => {
                   onClick={() => fetchUserMessages(d)}
                 />
               ))}
+            </div>
+            <div className="absolute right-[10px] bottom-[10px] text-[#fff] flex rounded-[50%] items-center justify-center cursor-pointer ">
+              <ChatIcon
+                className="h-[50px] w-[50px] text-hover hover:text-[#fff]"
+                onClick={() => {
+                  setChatOptions((prev) => ({ ...prev, sidebar: "search" }));
+                }}
+              />
             </div>
           </div>
         </div>

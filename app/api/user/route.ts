@@ -5,7 +5,6 @@ import { UserModel } from "@/models/USER/User.model";
 export async function POST(req: NextRequest, res: NextResponse) {}
 export async function GET(req: NextRequest, res: NextResponse) {
   const session: any = await auth();
-  console.log();
   if (!session) {
     return NextResponse.json(
       {
@@ -16,7 +15,10 @@ export async function GET(req: NextRequest, res: NextResponse) {
       }
     );
   }
-  const userss = await UserModel.find({}).select("-password");
+  const currentUser = await UserModel.findById(session?.user.id);
+  const userss = await UserModel.find({
+    chatrooms: { $in: currentUser?.chatrooms },
+  }).select("-password");
   const filteredUsers = userss.filter((d: any) => d?._id != session?.user?.id);
   return NextResponse.json(
     {

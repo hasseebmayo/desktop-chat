@@ -36,7 +36,7 @@ const ShareBar = () => {
       <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
         <BackArrow
           onClick={() => {
-            setChatOptions((prev) => ({ ...prev, sidebar: 0 }));
+            setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
           }}
           className="w-[30px] h-[30px] cursor-pointer hover:text-hover"
         />

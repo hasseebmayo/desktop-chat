@@ -65,15 +65,7 @@ const SignupPage = () => {
               className="rounded-primary "
               {...register("password")}
             />
-            <Input
-              label="PhoneNo"
-              placeholder="Enter a phone no"
-              type="number"
-              register={register}
-              error={errors.phoneNo?.message}
-              className="rounded-primary"
-              {...register("phoneNo")}
-            />
+
             <div className="flex justify-end items-end">
               <span
                 className="cursor-pointer text-[#fff] hover:text-hover"

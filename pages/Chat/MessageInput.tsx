@@ -7,10 +7,11 @@ import usePostApi from "@/hooks/usePostApi/usePostApi";
 import { useMessageContext } from "@/Provider/MessageProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import useToastify from "@/hooks/useToastify/useToastify";
-import { socket } from "@/utils/socket/socket";
-
+import { io } from "socket.io-client";
 const MessageInput = () => {
   const textareaRef = useRef<HTMLDivElement>(null);
+  const [socket, setSocket] = useState<any>();
+
   const [message, setMessage] = useState<string>("");
   const [chat, setChat] = useState<any>();
   const { authData, chatOptions, setChatOptions } = useMessageContext();
@@ -21,17 +22,7 @@ const MessageInput = () => {
     const content = event.currentTarget.innerText;
     setMessage(content);
   };
-  useEffect(() => {
-    const handleChat = (data: any) => {
-      // setChatOptions((prev) => ({ ...prev, chat: data }));
-      console.log(data);
-    };
 
-    socket.on("chat", handleChat);
-  }, []);
-  useEffect(() => {
-    socket.emit("join-room", chatOptions.chatRoomId);
-  }, [chatOptions.chatRoomId]);
   const sendMessage = () => {
     if (message.trim() === "") {
       return;
@@ -40,43 +31,22 @@ const MessageInput = () => {
       errorToast("Chat room id is missing!");
       return;
     }
-    socket.emit(
-      "send-message",
-      {
-        message,
-        chatroomId: chatOptions.chatRoomId,
-        createdAt: new Date(),
-        senderId: authData._id,
-      }
-      // (data: any) => {
-      //   setChatOptions((prev) => ({ ...prev, chat: data }));
-      //   setMessage("");
-      //   if (textareaRef.current) {
-      //     textareaRef.current.innerText = "";
-      //   }
-      // }
-    );
+    const messageData: any = {
+      message,
+      chatroomId: chatOptions.chatRoomId,
+      senderId: authData._id,
+      createdAt: new Date(),
+    };
+    socket.emit("send_message", messageData);
 
-    // mutationFunction(
-    //   {
-    //     data: {
-    //       senderId: authData._id,
-    //       chatroomId: chatOptions.chatRoomId,
-    //       message,
-    //     },
-    //     path: "/api/user/chat",
-    //   },
-    //   () => {
-    //     if (textareaRef?.current) {
-    //       textareaRef.current.innerText = "";
-    //       setMessage("");
-    //     }
-    //     queryClient.invalidateQueries({
-    //       refetchType: "active",
-    //       queryKey: [queryKeys.get_single_chat, chatOptions.chatRoomId],
-    //     });
-    //   }
-    // );
+    setChatOptions((prevv) => ({
+      ...prevv,
+      chat: [...prevv.chat, messageData],
+    }));
+    if (textareaRef?.current) {
+      textareaRef.current.innerText = "";
+      setMessage("");
+    }
   };
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" && event.shiftKey) {
@@ -92,17 +62,36 @@ const MessageInput = () => {
   };
 
   useEffect(() => {
-    socket.on("connection", () => {
-      console.log("On");
-    });
-  }, []);
-  useEffect(() => {
     // Adjust the bottom position based on the content height
     if (textareaRef.current) {
       const contentHeight = textareaRef.current.scrollHeight;
       textareaRef.current.style.bottom = `-${contentHeight}px - 26px`;
     }
   }, [message]);
+  useEffect(() => {
+    if (socket) {
+      socket.emit("join_room", chatOptions.chatRoomId);
+    }
+  }, [chatOptions.chatRoomId, socket]);
+  useEffect(() => {
+    if (socket) {
+      socket.on("receive_message", (data: any) => {
+        console.log("data:", data);
+        setChatOptions((p) => ({ ...p, chat: [...p.chat, data] }));
+      });
+      socket.on("update_messages", (data: any) => {
+        console.log("updateMessages from DB", data);
+      });
+    }
+  }, [socket, setChatOptions]);
+
+  useEffect(() => {
+    setSocket(
+      io("https://hasseebmayp.fly.dev", {
+        withCredentials: true,
+      })
+    );
+  }, []);
 
   return (
     <div className="flex px-[16px] w-[100%] items-center relative justify-between mb-[10px] ">
@@ -116,7 +105,11 @@ const MessageInput = () => {
         }}
       />
 
-      <div className="w-[86%] relative">
+      <div
+        className={
+          chatOptions.isUserDetail ? "w-[78%] relative" : "w-[86%] relative"
+        }
+      >
         <div
           className={`textarea`}
           contentEditable

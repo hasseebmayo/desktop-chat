@@ -7,6 +7,9 @@ export interface IUser {
   email: string;
   phoneNo: string;
   chatrooms: ObjectId[];
+  about: string;
+  profile_img: string;
+  requests: ObjectId[];
 }
 
 interface UserDocument extends IUser, Document {}
@@ -24,6 +27,9 @@ const userSchema: Schema<UserDocument> = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  profile_img: {
+    type: String,
+  },
   chatrooms: {
     type: [
       {
@@ -40,11 +46,17 @@ const userSchema: Schema<UserDocument> = new mongoose.Schema({
     lowercase: true,
     minlength: 5,
   },
-  phoneNo: {
-    required: true,
+  about: {
     type: String,
     trim: true,
+    default: "About.....",
   },
+  requests: [
+    {
+      type: Schema.ObjectId,
+      ref: "Users",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

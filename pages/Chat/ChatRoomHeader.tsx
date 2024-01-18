@@ -15,7 +15,11 @@ const ChatRoomHeader = () => {
           alt="Profile Place Holder"
           className="w-[47px] h-[49px] rounded-[50%] cursor-pointer"
           onClick={() => {
-            setChatOptions((prev) => ({ ...prev, sidebar: 5 }));
+            console.log();
+            setChatOptions((prev) => ({
+              ...prev,
+              isUserDetail: !prev.isUserDetail,
+            }));
           }}
         />
         {/* <PlaceHolder /> */}
@@ -23,7 +27,10 @@ const ChatRoomHeader = () => {
           <h1
             className="text-heading font-semibold text-[#fff] "
             onClick={() => {
-              setChatOptions((prev) => ({ ...prev, sidebar: 5 }));
+              setChatOptions((prev) => ({
+                ...prev,
+                isUserDetail: !prev.isUserDetail,
+              }));
             }}
           >
             {chatOptions.currentActiveUser?.name}

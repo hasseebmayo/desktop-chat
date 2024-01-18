@@ -1,4 +1,5 @@
 "use client";
+import useSingleChat from "@/hooks/fetchingHook/useSingleChat";
 import useSingleUser from "@/hooks/fetchingHook/useSingleUser";
 import { IUser } from "@/models/USER/User.model";
 import { IChat } from "@/pages/Chat/ChatBody";
@@ -8,17 +9,28 @@ import {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 export interface IUserId extends IUser {
   _id: string;
+  about: string;
+  profile_img: string;
 }
+export type sidebarTag =
+  | "home"
+  | "share"
+  | "profile"
+  | "search"
+  | "save"
+  | "setting";
 interface IMessage {
   id: string | null;
-  sidebar: number;
+  sidebar: sidebarTag | string;
   currentActiveUser: IUserId | null;
   chatRoomId: string | null;
   chat: IChat[];
+  isUserDetail: boolean;
 }
 interface MessageContextProps {
   chatOptions: IMessage;
@@ -43,17 +55,21 @@ export function MessageContextProvider({ children }: { children: ReactNode }) {
   const { response } = useSingleUser();
   const [chatOptions, setChatOptions] = useState<IMessage>({
     id: null,
-    sidebar: 0,
+    sidebar: "home",
     currentActiveUser: null,
     chatRoomId: null,
     chat: [],
+    isUserDetail: false,
   });
-
+  const { response: chatData } = useSingleChat(chatOptions.chatRoomId!);
   const value = {
     chatOptions,
     setChatOptions,
     authData: response,
   };
+  useEffect(() => {
+    setChatOptions((p) => ({ ...p, chat: chatData }));
+  }, [chatData]);
   return (
     <MessageContext.Provider value={value}>{children}</MessageContext.Provider>
   );

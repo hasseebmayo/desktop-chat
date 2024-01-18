@@ -26,6 +26,16 @@ module.exports = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "desktop-chat.s3.amazonaws.com",
+
+        pathname: "**",
+      },
+    ],
+  },
 
   // ...other config
 };

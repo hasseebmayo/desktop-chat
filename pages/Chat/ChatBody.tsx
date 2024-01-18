@@ -23,7 +23,7 @@ const ChatBody = ({ chat, authId }: messages) => {
         </div>
       </div>
       {chatOptions.chat?.map((data) => (
-        <div key={data._id} className="w-full">
+        <div key={data.createdAt.toString()} className="w-full">
           {authId !== data?.senderId?.toString() ? (
             <div className="messageLeft flex mb-[10px]">
               <div className=" flex bg-third rounded-[10px] py-[10px] px-[10px] w-auto">

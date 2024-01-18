@@ -5,12 +5,39 @@ import BackArrow from "@/assets/images/ArrowLeft.svg";
 import Luffy from "@/assets/images/Luffy.jpg";
 import CameraIcon from "@/assets/images/CameraIcon.svg";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import ProfileEditbar from "./components/ProfileEditbar";
-const ProfileBar = () => {
-  const { setChatOptions } = useMessageContext();
-  const [file, setFile] = useState<File | null>(null);
+import usePatchApi from "@/hooks/usePatchApi/usePatchApi";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/utils/queryKeys/queryKeys";
 
+const ProfileBar = () => {
+  const { setChatOptions, authData } = useMessageContext();
+  const [file, setFile] = useState<File | null>(null);
+  const { mutationFunction } = usePatchApi("Profile-Updated");
+  const queryClient = useQueryClient();
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      // Use files[0] because FileList may contain multiple files, and we're assuming only one file is selected.
+      formData.append("file", files[0]);
+      setFile(files[0]);
+    }
+
+    mutationFunction(
+      {
+        path: `/api/user/me?type=file`,
+        data: formData,
+      },
+      () => {
+        queryClient.invalidateQueries({
+          queryKey: [queryKeys.get_single_user],
+        });
+      }
+    );
+  };
   return (
     <motion.div
       initial={{
@@ -31,7 +58,7 @@ const ProfileBar = () => {
       <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
         <BackArrow
           onClick={() => {
-            setChatOptions((prev) => ({ ...prev, sidebar: 0 }));
+            setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
           }}
           className="w-[30px] h-[30px] cursor-pointer hover:text-hover"
         />
@@ -45,7 +72,13 @@ const ProfileBar = () => {
           "
           >
             <Image
-              src={file ? URL.createObjectURL(file) : Luffy}
+              src={
+                file
+                  ? URL.createObjectURL(file)
+                  : authData.profile_img
+                  ? authData.profile_img
+                  : Luffy
+              }
               alt="Profile Image"
               className="h-full w-full rounded-[50%] object-cover"
               width={150}
@@ -58,27 +91,23 @@ const ProfileBar = () => {
               className="absolute h-full w-full opacity-0 cursor-pointer"
               type="file"
               accept="image/*"
-              onChange={(e) => {
-                const files = e.target.files;
-                if (files && files.length > 0) {
-                  // Use files[0] because FileList may contain multiple files, and we're assuming only one file is selected.
-                  setFile(files[0]);
-                }
-              }}
+              onChange={changeHandler}
             />
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-[15px]">
         <ProfileEditbar
-          name="Haseeb Ahmad"
+          name={authData.name}
           caution="This is not yout user name or password"
           title="Your name"
+          type="name"
         />
         <ProfileEditbar
-          name="Lorem Ipsasdsadsad"
+          name={authData.about}
           caution="This is not yout user name or password"
           title="About"
+          type="about"
         />
       </div>
     </motion.div>
