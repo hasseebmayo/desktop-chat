@@ -11,16 +11,16 @@ const Provider = ({ children }: { children: ReactNode }) => {
   const client = new QueryClient();
   return (
     <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <QueryClientProvider client={client}>
-          <MessageContextProvider>{children}</MessageContextProvider>
-          <ReactQueryDevtools
-            position="left"
-            initialIsOpen={false}
-            buttonPosition="bottom-right"
-          />
-        </QueryClientProvider>
-      </ThemeProvider>
+      {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
+      <QueryClientProvider client={client}>
+        <MessageContextProvider>{children}</MessageContextProvider>
+        <ReactQueryDevtools
+          position="left"
+          initialIsOpen={false}
+          buttonPosition="bottom-right"
+        />
+      </QueryClientProvider>
+      {/* </ThemeProvider> */}
       <Toaster />
     </SessionProvider>
   );

@@ -27,7 +27,7 @@ const SavedBar = () => {
       className={`
     w-[394px] absolute top-0 left-0 h-full bg-primary mr-[5px] flex flex-col  z-40`}
     >
-      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
+      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px] text-[#fff]">
         <BackArrow
           onClick={() => {
             setChatOptions((prev) => ({ ...prev, sidebar: "home" }));

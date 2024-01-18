@@ -11,6 +11,7 @@ import { useState } from "react";
 import usePostApi from "@/hooks/usePostApi/usePostApi";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/utils/queryKeys/queryKeys";
+import LoadingSpinner from "@/components/Spinner/SpinnerLoader";
 const SearchBar = () => {
   const { response, isLoading } = useNotAddedUsrs();
   const [search, setSearch] = useState<string>("");
@@ -70,7 +71,7 @@ const SearchBar = () => {
       className={`
     w-[394px] absolute top-0 left-0 h-full bg-primary mr-[5px] flex flex-col  z-40`}
     >
-      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
+      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px] text-[#fff]">
         <BackArrow
           onClick={() => {
             setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
@@ -89,30 +90,36 @@ const SearchBar = () => {
         />
       </div>
       {isLoading ? (
-        <>Loading.....</>
+        <LoadingSpinner height="100%" />
       ) : (
         <div className="flex flex-col h-[100%] overflow-y-auto messageScroll">
-          {filteredUsrs?.map((d: IUserId, i: number) => (
-            <div
-              className="flex gap-[10px] items-center hover:bg-[#47464666] px-[30px] py-[5px] cursor-pointer mt-[10px] transition-colors"
-              key={d._id}
-              onClick={() => handleCreateRoom(d)}
-            >
-              <Image
-                className="w-[55px] h-[55px] rounded-[50%]"
-                src={d.profile_img ? d.profile_img : Profile}
-                alt="Profile Pic"
-                height={55}
-                width={55}
-              />
-              <div className="flex flex-col ">
-                <h2 className="text-heading  font-semibold text-[#fff] ">
-                  {d.name}
-                </h2>
-                <p className="text-para text-[#fff]">{d.about}</p>
-              </div>
+          {filteredUsrs?.length == 0 ? (
+            <div className="w-[100%] flex items-center justify-center h-[60%]">
+              <p className="text-[#fff]">No user is found</p>
             </div>
-          ))}
+          ) : (
+            filteredUsrs?.map((d: IUserId, i: number) => (
+              <div
+                className="flex gap-[10px] items-center hover:bg-[#47464666] px-[30px] py-[5px] cursor-pointer mt-[10px] transition-colors"
+                key={d._id}
+                onClick={() => handleCreateRoom(d)}
+              >
+                <Image
+                  className="w-[55px] h-[55px] rounded-[50%]"
+                  src={d.profile_img ? d.profile_img : Profile}
+                  alt="Profile Pic"
+                  height={55}
+                  width={55}
+                />
+                <div className="flex flex-col ">
+                  <h2 className="text-heading  font-semibold text-[#fff] ">
+                    {d.name}
+                  </h2>
+                  <p className="text-para text-[#fff]">{d.about}</p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       )}
     </motion.div>

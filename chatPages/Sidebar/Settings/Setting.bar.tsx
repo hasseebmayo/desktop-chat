@@ -62,12 +62,13 @@ const SettingBar = () => {
       className={`
     w-[394px] absolute top-0 left-0 h-full bg-primary mr-[5px] flex flex-col  z-40`}
     >
-      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
+      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px] text-[#fff]">
         <BackArrow
           onClick={() => {
             setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
           }}
-          className="w-[30px] h-[30px] cursor-pointer hover:text-hover"
+          className="w-[30px] h-[30px] cursor-pointer hover:text-hover 
+          text-[#fff]"
         />
         <p className="text-heading font-semibold">Settings</p>
       </div>
@@ -98,7 +99,7 @@ const SettingBar = () => {
         <div>
           {options.map((d, i) => (
             <div
-              className="px-[30px] py-[15px] flex items-center gap-[30px] cursor-pointer hover:bg-[#47464666] transition-colors w-full relative"
+              className="px-[30px] py-[15px] flex items-center gap-[30px] cursor-pointer hover:bg-[#47464666] transition-colors w-full relative text-[#fff]"
               key={d.title}
               onClick={() => {
                 if (d.title == "Logout") {
@@ -107,7 +108,7 @@ const SettingBar = () => {
               }}
             >
               {d.icon}
-              <div className=" w-full flex flex-col ">
+              <div className=" w-full flex flex-col text-[#fff]">
                 <h3>{d.title}</h3>
                 <div
                   className="w-[77%]  absolute bottom-0 h-[1px] bg-[#47464666]

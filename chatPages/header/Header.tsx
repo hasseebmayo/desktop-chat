@@ -8,7 +8,7 @@ type HeaderType = {
 const Header = ({}) => {
   const router = useRouter();
   return (
-    <div className="flex absolute top-0 w-full px-[20px] py-[15px] justify-between items-center bg-third">
+    <div className="flex absolute top-[0px] w-full px-[20px] py-[15px] justify-between items-center bg-third">
       <div
         className="flex items-center cursor-pointer group"
         onClick={() => {

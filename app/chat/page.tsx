@@ -1,16 +1,16 @@
 "use client";
-import ChatRoom from "@/pages/Chat/ChatRoom";
-import SideBar from "@/pages/Sidebar/SideBar";
-import UserMenu from "@/pages/UserMenu/UserMenu";
-import SettingBar from "@/pages/Sidebar/Settings/Setting.bar";
+import ChatRoom from "@/chatPages/Chat/ChatRoom";
+import SideBar from "@/chatPages/Sidebar/SideBar";
+import UserMenu from "@/chatPages/UserMenu/UserMenu";
+import SettingBar from "@/chatPages/Sidebar/Settings/Setting.bar";
 import { sidebarTag, useMessageContext } from "@/Provider/MessageProvider";
-import SearchBar from "@/pages/Sidebar/Settings/SearchBar";
-import SavedBar from "@/pages/Sidebar/Settings/SavedBar";
-import ShareBar from "@/pages/Sidebar/Settings/ShareBar";
+import SearchBar from "@/chatPages/Sidebar/Settings/SearchBar";
+import SavedBar from "@/chatPages/Sidebar/Settings/SavedBar";
+import ShareBar from "@/chatPages/Sidebar/Settings/ShareBar";
 import { AnimatePresence } from "framer-motion";
-import ProfileBar from "@/pages/Sidebar/Settings/ProfileBar";
+import ProfileBar from "@/chatPages/Sidebar/Settings/ProfileBar";
 import { ReactNode } from "react";
-import ChatUserInfo from "@/pages/UserMenu/ChatUserInfo";
+import ChatUserInfo from "@/chatPages/UserMenu/ChatUserInfo";
 type sideBarIcons = {
   tag: sidebarTag;
   icon: ReactNode;

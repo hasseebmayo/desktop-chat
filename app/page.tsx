@@ -1,5 +1,5 @@
 "use client";
-import Header from "@/pages/header/Header";
+import Header from "@/chatPages/header/Header";
 import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();

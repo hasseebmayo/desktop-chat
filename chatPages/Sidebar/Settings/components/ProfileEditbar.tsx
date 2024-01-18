@@ -41,7 +41,7 @@ const ProfileEditbar = ({ name, caution, title, type }: Profile) => {
     );
   };
   return (
-    <div className="flex flex-col px-[30px] gap-[15px]">
+    <div className="flex flex-col px-[30px] gap-[15px] text-[#fff]">
       <h6 className="text-hover text-para font-semibold">{title}</h6>
       {isEditable ? (
         <div className=" profileEditBar flex ">

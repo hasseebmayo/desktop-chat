@@ -1,4 +1,5 @@
-import PlaceHolder from "../../../assets/images/Placeholder.svg";
+import Profile from "../../../assets/images/Profile.png";
+import Image from "next/image";
 interface IUserMessage {
   name: string;
   message?: string;
@@ -6,6 +7,7 @@ interface IUserMessage {
   onClick?: () => void;
   index: number;
   isChatActive: boolean;
+  profile_image?: string | null;
 }
 const UserMessageInfo = ({
   message,
@@ -13,6 +15,7 @@ const UserMessageInfo = ({
   unread,
   onClick,
   index,
+  profile_image,
   isChatActive,
 }: IUserMessage) => {
   return (
@@ -23,7 +26,13 @@ const UserMessageInfo = ({
       tabIndex={index}
       onClick={onClick}
     >
-      <PlaceHolder />
+      <Image
+        src={profile_image ? profile_image : Profile}
+        alt="profil"
+        className="w-[40px] h-[40px] rounded-[50%] "
+        height={40}
+        width={40}
+      />
       <div className="flex flex-col ">
         <h2 className="text-para font-semibold text-[#fff]">{name}</h2>
         <p

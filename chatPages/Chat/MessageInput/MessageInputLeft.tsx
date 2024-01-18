@@ -49,7 +49,7 @@ const MessageInputLeft = ({ onEmojiClick }: leftSideMessageType) => {
             <Plus className="h-[30px] w-[30px] cursor-pointer text-hover rotate-[45deg]" />
           ) : (
             <Emoji
-              className="h-[30px] w-[30px] hover:text-hover transition-colors cursor-pointer"
+              className="h-[30px] w-[30px] hover:text-hover transition-colors cursor-pointer text-[#fff]"
               ref={emojiContainer}
               onClick={() => {
                 setIsEmoji((prev) => !prev);

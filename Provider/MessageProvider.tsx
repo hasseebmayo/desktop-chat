@@ -2,7 +2,7 @@
 import useSingleChat from "@/hooks/fetchingHook/useSingleChat";
 import useSingleUser from "@/hooks/fetchingHook/useSingleUser";
 import { IUser } from "@/models/USER/User.model";
-import { IChat } from "@/pages/Chat/ChatBody";
+import { IChat } from "@/chatPages/Chat/ChatBody";
 import {
   Dispatch,
   ReactNode,

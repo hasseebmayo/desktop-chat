@@ -11,7 +11,11 @@ const ChatRoomHeader = () => {
     <div className="w-full bg-primary flex  pt-[26px] pl-[12px] pr-[26px] pb-[22px] justify-between">
       <div className="flex gap-[16px] items-center">
         <Image
-          src={PlaceHolder}
+          src={
+            chatOptions?.currentActiveUser?.profile_img
+              ? chatOptions?.currentActiveUser?.profile_img
+              : PlaceHolder
+          }
           alt="Profile Place Holder"
           className="w-[47px] h-[49px] rounded-[50%] cursor-pointer"
           onClick={() => {
@@ -41,7 +45,7 @@ const ChatRoomHeader = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-[17px]">
+      <div className="flex items-center gap-[17px] text-[#fff]">
         <Video
           className="cursor-pointer hover:text-hover w-[40px] h-[40px]
         transition-colors

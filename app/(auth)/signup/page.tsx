@@ -1,6 +1,6 @@
 "use client";
 import Input from "@/components/Input/Input";
-import Header from "@/pages/header/Header";
+import Header from "@/chatPages/header/Header";
 import PasswordInput from "@/components/Input/PassswordInput";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";

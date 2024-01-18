@@ -33,7 +33,7 @@ const ShareBar = () => {
       className={`
     w-[394px] absolute top-0 left-0 h-full bg-primary mr-[5px] flex flex-col  z-40`}
     >
-      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
+      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px] text-[#fff]">
         <BackArrow
           onClick={() => {
             setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
@@ -46,7 +46,7 @@ const ShareBar = () => {
         <div className=" bg-third rounded-[10px] p-[15px] pt-[25px] relative">
           <div className="absolute right-[10px] top-[5px]">
             <Copy
-              className="h-[23px] w-[23px] cursor-pointer hover:text-hover "
+              className="h-[23px] w-[23px] cursor-pointer hover:text-hover text-[#fff]"
               onClick={() => {
                 navigator.clipboard.writeText("Lorem Ipsum");
                 setIsCopied(true);
@@ -74,7 +74,7 @@ const ShareBar = () => {
               )}
             </AnimatePresence>
           </div>
-          <p>
+          <p className="text-[#fff]">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
             quibusdam ratione nostrum, voluptatibus iusto impedit modi ut,
             eveniet eos consectetur sequi nemo corporis odio, consequuntur

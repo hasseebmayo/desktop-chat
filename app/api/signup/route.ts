@@ -7,9 +7,9 @@ import { DBConnection } from "@/utils/DBConnection/DBconnection";
 DBConnection();
 export async function POST(req: Request) {
   try {
-    const { password, name, phoneNo, email } = await req.json();
+    const { password, name, email } = await req.json();
 
-    zodUserSchema.parse({ password, name, phoneNo, email });
+    zodUserSchema.parse({ password, name, email });
     const isUserExiest = await UserModel.findOne({
       email,
     });
@@ -29,7 +29,6 @@ export async function POST(req: Request) {
     const user = await new UserModel({
       password: hashedPassword,
       name,
-      phoneNo,
       email,
     }).save();
 

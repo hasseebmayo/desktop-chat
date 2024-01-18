@@ -13,11 +13,8 @@ const MessageInput = () => {
   const [socket, setSocket] = useState<any>();
 
   const [message, setMessage] = useState<string>("");
-  const [chat, setChat] = useState<any>();
   const { authData, chatOptions, setChatOptions } = useMessageContext();
   const { errorToast } = useToastify();
-  const { mutationFunction } = usePostApi();
-  const queryClient = useQueryClient();
   const handleInputChange = (event: React.FormEvent<HTMLDivElement>) => {
     const content = event.currentTarget.innerText;
     setMessage(content);

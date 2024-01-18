@@ -23,8 +23,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
   ref
 ) {
   return (
-    <div className="relative w-full  flex flex-col gap-[5px]">
-      {label && <label className="text-para ">{label}</label>}
+    <div className="relative w-full  flex flex-col gap-[5px] text-[#fff]">
+      {label && <label className="text-para text-[#fff] ">{label}</label>}
       <div className="relative w-full h-[36px]">
         {leftIcon && (
           <div className="absolute left-[11px] top-[50%] transform -translate-y-1/2 text-white w-[20px] h-[20px]">
@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
         <input
           ref={ref}
           autoComplete={"off"}
-          className={`h-full w-full rounded-[100px] pt-[11px] ${
+          className={`h-full w-full rounded-[100px] pt-[11px] text-[#fff] ${
             leftIcon ? "pl-[37px]" : "pl-[11px]"
           } pb-[11px] bg-[#5436397a] ${className} focus:outline-[#7C39E6] focus:outline outline-none text-[12px] font-light`}
           {...register?.(PROPS.name ?? "")}

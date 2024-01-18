@@ -16,12 +16,12 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="relative w-full  flex flex-col gap-[5px]">
-        {label && <label className="text-para ">{label}</label>}
+        {label && <label className="text-para text-[#fff]">{label}</label>}
         <div className="relative w-full h-[36px]">
           <input
             ref={ref}
             className={`h-full w-full rounded-[100px] pt-[11px] 
-               pl-[11px]
+               pl-[11px] text-[#fff]
            pb-[11px] bg-[#5436397a] ${className} focus:outline-[#7C39E6] focus:outline outline-none text-[12px] font-light`}
             {...PROPS}
             {...register?.(PROPS.name ?? "")}

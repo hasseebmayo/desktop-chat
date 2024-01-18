@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
 
 * {
   margin: 0;
@@ -64,6 +66,7 @@ body {
   overflow-y: auto;
   padding: 5px 10px;
   bottom: -26px;
+  color: #fff;
   font-family: "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI", Arial,
     sans-serif;
   font-size: 18px;

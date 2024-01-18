@@ -7,7 +7,7 @@ type queryString = {
 };
 const useSearchParamsHook = () => {
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(searchParams!);
   const pathname = usePathname();
   const { replace } = useRouter();
 

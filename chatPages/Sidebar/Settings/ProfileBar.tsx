@@ -55,7 +55,7 @@ const ProfileBar = () => {
       className={`
     w-[394px] absolute top-0 left-0 h-full bg-primary mr-[5px] flex flex-col  z-40`}
     >
-      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px]">
+      <div className="flex gap-[40px] items-center bg-third px-[30px] pt-[51px] pb-[15px] text-[#fff]">
         <BackArrow
           onClick={() => {
             setChatOptions((prev) => ({ ...prev, sidebar: "home" }));
@@ -75,8 +75,8 @@ const ProfileBar = () => {
               src={
                 file
                   ? URL.createObjectURL(file)
-                  : authData.profile_img
-                  ? authData.profile_img
+                  : authData?.profile_img
+                  ? authData?.profile_img
                   : Luffy
               }
               alt="Profile Image"
@@ -98,13 +98,13 @@ const ProfileBar = () => {
       </div>
       <div className="flex flex-col gap-[15px]">
         <ProfileEditbar
-          name={authData.name}
+          name={authData?.name}
           caution="This is not yout user name or password"
           title="Your name"
           type="name"
         />
         <ProfileEditbar
-          name={authData.about}
+          name={authData?.about}
           caution="This is not yout user name or password"
           title="About"
           type="about"
